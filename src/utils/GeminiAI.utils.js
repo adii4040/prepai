@@ -49,11 +49,11 @@ class GEMINI_AI_SERVICE {
             throw new Error("No textual content returned from Gemini API.");
         }
 
-        console.log('AI GENERATION COMPLETED...')
+        console.log('AI GENERATION COMPLETED!!')
         const jsonRaw = JSON.parse(response.text);
-        console.log('RAW RES: ', jsonRaw)
 
         if (this.zodJsonSchema) {
+            console.log('VALIDATING AI RESPONSE WITH ZOD SCHEMA...')
             return this.zodJsonSchema.parse(jsonRaw);
         }
 

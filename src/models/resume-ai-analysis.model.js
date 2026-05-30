@@ -99,6 +99,20 @@ const behavioralQuestionSchema = new Schema({
 
 })
 
+const marketSnapshotSchema = new Schema({
+    summary: {
+        type: String,
+    },
+    trendingTechnologies: {
+        type: [String],
+    },
+    industryExpectations: {
+        type: [String],
+    },
+    marketGaps: {
+        type: [String],
+    }
+})
 
 const resumeAIAnalysisSchema = new Schema({
     userId: {
@@ -115,6 +129,14 @@ const resumeAIAnalysisSchema = new Schema({
     },
     matchScore: {
         type: Number,
+        required: true
+    },
+    needsImprovement: {
+        type: String,
+        required: true
+    },
+    marketSnapshot: {
+        type: marketSnapshotSchema,
         required: true
     },
     skillGaps: {

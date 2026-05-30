@@ -5,6 +5,7 @@ import { resumeAiAnalysisService } from '../services/resume_analysis.service.js'
 import { extractResumeText } from '../services/pdf_parser.service.js'
 import ResumeAIAnalysis from '../models/resume-ai-analysis.model.js'
 import { uploadOnCloudinary } from "../utils/Cloudinary.utils.js"
+import { getMarketInsights } from '../services/jd_extraction.service.js'
 
 
 const analyzeResume = asyncHandler(async (req, res) => {
@@ -14,9 +15,15 @@ const analyzeResume = asyncHandler(async (req, res) => {
     if (!req.file) throw new ApiError(400, 'Resume file is required!!')
 
     const resumeFile = req.file
+
     const cloudinaryResumeFileUrl = await uploadOnCloudinary(resumeFile.path)
 
-    const resumeText = await extractResumeText(cloudinaryResumeFileUrl.secure_url)
+    const [resumeText, marketInsights] = await Promise.all([
+        extractResumeText(cloudinaryResumeFileUrl.secure_url),
+        getMarketInsights(jobDescription)
+    ])
+
+    console.log('MARKET INSIGHTS FETCHED!!')
 
     let timelinePromptContext = "";
     const today = new Date();
@@ -35,14 +42,24 @@ const analyzeResume = asyncHandler(async (req, res) => {
         jobDescription,
         resumeText,
         selfDescription,
-        timelinePromptContext
+        timelinePromptContext,
+        marketInsights
     })
+
+    console.log('AI ANALYSIS COMPLETED!!')
 
     const analysisRecord = await ResumeAIAnalysis.create({
         userId,
         analysisTitle: ai_result.analysisTitle,
         resumeFileUrl: cloudinaryResumeFileUrl.secure_url,
         matchScore: ai_result.matchScore,
+        needsImprovement: ai_result.needsImprovement,
+        marketSnapshot: {
+            summary: ai_result.marketSnapshot.summary,
+            trendingTechnologies: ai_result.marketSnapshot.trendingTechnologies,
+            industryExpectations: ai_result.marketSnapshot.industryExpectations,
+            marketGaps: ai_result.marketSnapshot.marketGaps
+        },
         skillGaps: ai_result.skillGaps,
         preparationPlan: ai_result.preparationPlan,
         topTechnicalQuestions: ai_result.topTechnicalQuestions,
