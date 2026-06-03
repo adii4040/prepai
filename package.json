@@ -7,7 +7,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "build": "echo Building server...",
+    "start": "node src/index.js"
   },
   "dependencies": {
     "@google/genai": "^2.6.0",
