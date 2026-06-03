@@ -1,7 +1,7 @@
 
 import mongoose from "mongoose"
-import { ApiError } from "../Utils/ApiError.utils.js"
-import { asyncHandler } from "../Utils/AsyncHandler.utils.js"
+import { ApiError } from "../utils/ApiError.utils.js"
+import { asyncHandler } from "../utils/AsyncHandler.utils.js"
 import User from "../models/user.model.js"
 
 export const validationSource = {

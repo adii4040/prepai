@@ -1,9 +1,9 @@
 import User from '../models/user.model.js'
 
 /*-------Import Utilities-----*/
-import { asyncHandler } from '../Utils/AsyncHandler.utils.js'
-import { ApiResponse } from '../Utils/ApiResponse.utils.js'
-import { ApiError } from '../Utils/ApiError.utils.js'
+import { asyncHandler } from '../utils/AsyncHandler.utils.js'
+import { ApiResponse } from '../utils/ApiResponse.utils.js'
+import { ApiError } from '../utils/ApiError.utils.js'
 import { cookieOption } from '../utils/constants.utils.js'
 
 
