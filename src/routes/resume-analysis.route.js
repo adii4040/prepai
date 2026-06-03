@@ -18,7 +18,7 @@ router.route('/').post(
     analyzeResume
 )
 
-router.route('/user').get(
+router.route('/user/all').get(
     verifyJwt,
     getAllAnalytics
 )
