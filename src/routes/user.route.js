@@ -17,8 +17,7 @@ router.route('/register').post(validate(validateUserRegisteration, validationSou
 router.route('/login').post(validate(validateUserLogin, validationSource.BODY), loginUser)
 
 //Secured Routes
-router.route('/logout').get(verifyJwt, logoutUser)
-// router.route('/update').put(verifyJwt, validate(validateUpdateForm, validationSource.BODY) , updateUser)
+router.route('/logout').post(verifyJwt, logoutUser)
 router.route('/@me').get(verifyJwt, getCurrentUser)
 
 
