@@ -191,7 +191,7 @@ Use the market intelligence above to cross-reference skill gaps (set marketValid
 
         return response
     } catch (error) {
-
-        throw new Error('Failed to analyze resume: ' + error.message)
+        console.error('Failed to analyze resume: ', error)
+        throw new Error(error)
     }
 }
