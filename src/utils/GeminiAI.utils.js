@@ -3,7 +3,7 @@ import { zodToJsonSchema } from "zod-to-json-schema";
 
 class GEMINI_AI_SERVICE {
     constructor({
-        modelName = 'gemini-2.5-flash',
+        modelName = 'gemini-3.5-flash-lite',
         config = {},
         userPrompt = '',
         systemPrompt = '',
